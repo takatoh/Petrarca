@@ -1,4 +1,7 @@
 require "isbn_utils/version"
+require "isbn_utils/isbn13"
+require "isbn_utils/isbn10"
+
 
 module ISBNUtils
   class Error < StandardError; end
@@ -9,9 +12,9 @@ module ISBNUtils
     isbn = isbn.delete("-")
     case isbn.size
     when 13
-      !!(/\A97[89]\d{9}\d\z/ =~ isbn)
+      ISBN13.correct_format?(isbn)
     when 10
-      !!(/\A\d{9}[0-9X]\z/ =~ isbn)
+      ISBN10.correct_format?(isbn)
     else
       false
     end
