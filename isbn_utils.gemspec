@@ -5,7 +5,7 @@ require "isbn_utils/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "isbn_utils"
-  spec.version       = IsbnUtils::VERSION
+  spec.version       = ISBNUtils::VERSION
   spec.authors       = ["TODO: Write your name"]
   spec.email         = ["TODO: Write your email address"]
 
