@@ -19,4 +19,17 @@ module ISBNUtils
       false
     end
   end
+
+  def calc_check_digit(isbn)
+    isbn = isbn.delete("-")
+    case isbn.size
+    when 12, 13
+      ISBN13.calc_check_digit(isbn)
+    when 9, 10
+      ISBN10.calc_check_digit(isbn)
+    else
+      nil
+    end
+  end
+
 end
