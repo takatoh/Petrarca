@@ -26,11 +26,10 @@ module ISBNUtils
       g = ""
       ranges[prefix].each do |range_str|
         s, e = range_str.split("-")
-        l = s.size - 1
-        g = body[0..l]
+        g = body[0..(s.size - 1)]
         break if Range.new(s.to_i, e.to_i).cover?(g.to_i)
       end
-      g
+      [g, body[(g.size)..]]
     end
 
   end
