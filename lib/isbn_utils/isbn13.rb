@@ -28,9 +28,9 @@ module ISBNUtils
       ean_prefix = isbn[0..2]
       body = isbn[3..11]
       check_digit = isbn[12..12]
-      registration_group, body = split_to_parts(body, ean_prefix, RegistrationGroupRanges)
+      registration_group, body = split_to_parts(body, RegistrationGroupRanges[ean_prefix])
       prefix = "#{ean_prefix}-#{registration_group}"
-      registrant, publication = split_to_parts(body, prefix, RegistrantRanges)
+      registrant, publication = split_to_parts(body, RegistrantRanges[prefix])
       [ean_prefix, registration_group, registrant, publication, check_digit].join("-")
     end
 
