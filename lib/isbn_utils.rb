@@ -5,6 +5,7 @@ require "isbn_utils/isbn10"
 
 module ISBNUtils
   class Error < StandardError; end
+  class IncorrectFormatError < StandardError; end
 
   extend self
 
@@ -38,7 +39,7 @@ module ISBNUtils
     when 9, 10
       ISBN10.calc_check_digit(isbn)
     else
-      nil
+      raise IncorrectFormatError
     end
   end
 
