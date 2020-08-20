@@ -1,5 +1,10 @@
+require "isbn_utils/helpers"
+
+
 module ISBNUtils
   module ISBN10
+
+    include Helpers
 
     extend self
 
@@ -24,6 +29,11 @@ module ISBNUtils
       else
         check_digit.to_s
       end
+    end
+
+    def hyphenate(isbn)
+      s = hyphenate13("978" + isbn)
+      s.sub(/^978-/, "")
     end
 
   end
