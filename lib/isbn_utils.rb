@@ -43,4 +43,14 @@ module ISBNUtils
     end
   end
 
+  def hyphenate(isbn)
+    isbn = isbn.to_s
+    case isbn.size
+    when 13
+      ISBN13.hyphenate(isbn)
+    when 10
+      ISBN10.hyphenate(isbn)
+    end
+  end
+
 end
