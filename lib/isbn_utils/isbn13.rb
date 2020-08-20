@@ -1,3 +1,6 @@
+require "isbn_utils/registration_group_ranges"
+
+
 module ISBNUtils
   module ISBN13
 
@@ -17,6 +20,17 @@ module ISBNUtils
       sum = nums.zip([1, 3] * 6).map{|x, y| x * y }.inject(:+)
       check_digit = 10 - (sum % 10)
       check_digit == 10 ? "0" : check_digit.to_s
+    end
+
+    def split_to_parts(body, prefix, ranges)
+      g = ""
+      ranges[prefix].each do |range_str|
+        s, e = range_str.split("-")
+        l = s.size - 1
+        g = body[0..l]
+        break if Range.new(s.to_i, e.to_i).cover?(g.to_i)
+      end
+      g
     end
 
   end
