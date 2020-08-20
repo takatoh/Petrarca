@@ -8,6 +8,18 @@ module ISBNUtils
 
   extend self
 
+  def valid?(isbn)
+    isbn = isbn.delete("-")
+    case isbn.size
+    when 13
+      ISBN13.valid?(isbn)
+    when 10
+      ISBN10.valid?(isbn)
+    else
+      false
+    end
+  end
+
   def correct_format?(isbn)
     isbn = isbn.delete("-")
     case isbn.size

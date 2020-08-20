@@ -3,6 +3,10 @@ module ISBNUtils
 
     extend self
 
+    def valid?(isbn)
+      correct_format?(isbn) && isbn[-1] == calc_check_digit(isbn)
+    end
+
     def correct_format?(isbn)
       isbn = isbn.delete("-")
       !!(/\A\d{9}[0-9X]\z/ =~ isbn)
