@@ -25,13 +25,7 @@ module ISBNUtils
     end
 
     def hyphenate(isbn)
-      ean_prefix = isbn[0..2]
-      body = isbn[3..11]
-      check_digit = isbn[12..12]
-      registration_group, body = split_to_parts(body, RegistrationGroupRanges[ean_prefix])
-      prefix = "#{ean_prefix}-#{registration_group}"
-      registrant, publication = split_to_parts(body, RegistrantRanges[prefix])
-      [ean_prefix, registration_group, registrant, publication, check_digit].join("-")
+      hyphenate13(isbn)
     end
 
   end
