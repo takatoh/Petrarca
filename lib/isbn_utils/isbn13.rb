@@ -1,4 +1,5 @@
 require "isbn_utils/registration_group_ranges"
+require "isbn_utils/registrant_ranges"
 
 
 module ISBNUtils
@@ -20,6 +21,16 @@ module ISBNUtils
       sum = nums.zip([1, 3] * 6).map{|x, y| x * y }.inject(:+)
       check_digit = 10 - (sum % 10)
       check_digit == 10 ? "0" : check_digit.to_s
+    end
+
+    def hyphenate(isbn)
+      ean_prefix = isbn[0..2]
+      body = isbn[3..11]
+      check_digit = isbn[12..12]
+      registration_group, body = split_to_parts(body, ean_prefix, ISBNUtils::RegistrationGroupRanges)
+      prefix = "#{ean_prefix}-#{registration_group}"
+      registrant, publication = split_to_parts(body, prefix, ISBNUtils::RegistrantRanges)
+      [ean_prefix, registration_group, registrant, publication, check_digit].join("-")
     end
 
     def split_to_parts(body, prefix, ranges)
