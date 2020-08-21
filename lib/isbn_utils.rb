@@ -1,11 +1,16 @@
 require "isbn_utils/version"
 require "isbn_utils/isbn13"
 require "isbn_utils/isbn10"
+require "isbn_utils/helpers"
 
 
 module ISBNUtils
   class Error < StandardError; end
   class IncorrectFormatError < StandardError; end
+
+  data_dir = __dir__ + "/../data"
+  REGISTRATION_GROUP_RANGES = Helpers.load_ranges("#{data_dir}/registration_group_ranges.txt")
+  REGISTRANT_RANGES = Helpers.load_ranges("#{data_dir}/registrant_ranges.txt")
 
   extend self
 
