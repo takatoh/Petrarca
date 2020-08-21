@@ -42,6 +42,10 @@ Or install it yourself as:
     irb(main):006:0> ISBNUtils.hyphenate("9784815606442")
     => "978-4-8156-0644-2"
 
+## License
+
+MIT License
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at
