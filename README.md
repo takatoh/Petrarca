@@ -1,8 +1,15 @@
-# IsbnUtils
+# ISBNUtils
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/isbn_utils`. To experiment with that code, run `bin/console` for an interactive prompt.
+This library provides some utility functions for ISBN:
 
-TODO: Delete this and the text above, and describe your gem
+- Validation
+- Calculate check digit
+- Mutual conversion of ISBN13 and ISBN10
+- Hyphenation
+
+All functions support both ISBN13 and ISBN10.
+
+Note: Only registrant ranges for Japan are currently supported.
 
 ## Installation
 
@@ -22,14 +29,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    irb(main):001:0> require 'isbn_utils'
+    => true
+    irb(main):002:0> ISBNUtils.valid?("978-4-8156-0644-2")
+    => true
+    irb(main):003:0> ISBNUtils.calc_check_digit("978-4-8156-0644-2")
+    => "2"
+    irb(main):004:0> ISBNUtils.to_10("978-4-8156-0644-2")
+    => "4-8156-0644-7"
+    irb(main):005:0> ISBNUtils.to_13("4-8156-0644-7")
+    => "978-4-8156-0644-2"
+    irb(main):006:0> ISBNUtils.hyphenate("9784815606442")
+    => "978-4-8156-0644-2"
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/isbn_utils.
+Bug reports and pull requests are welcome on GitHub at
+https://github.com/takatoh/isbn_utils.
