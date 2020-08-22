@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["takatoh.m@gmail.com"]
 
   spec.summary       = %q{Manipulate ISBN numbers.}
-#  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.description   = %q{Library to manipulate ISBN numbers for Ruby.}
   spec.homepage      = "https://github.com/takatoh/isbn_utils"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
