@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "isbn_utils/version"
+require "petrarca/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "isbn_utils"
-  spec.version       = ISBNUtils::VERSION
+  spec.name          = "petrarca"
+  spec.version       = Petrarca::VERSION
   spec.authors       = ["takatoh"]
   spec.email         = ["takatoh.m@gmail.com"]
 
   spec.summary       = %q{Manipulate ISBN numbers.}
   spec.description   = %q{Library to manipulate ISBN numbers for Ruby.}
-  spec.homepage      = "https://github.com/takatoh/isbn_utils"
+  spec.homepage      = "https://github.com/takatoh/Petrarca"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
