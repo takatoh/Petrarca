@@ -1,7 +1,7 @@
-require "isbn_utils/helpers"
+require "petrarca/helpers"
 
 
-module ISBNUtils
+module Petrarca
   module ISBN13
 
     include Helpers

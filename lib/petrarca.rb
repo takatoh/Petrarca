@@ -1,10 +1,10 @@
-require "isbn_utils/version"
-require "isbn_utils/isbn13"
-require "isbn_utils/isbn10"
-require "isbn_utils/helpers"
+require "petrarca/version"
+require "petrarca/isbn13"
+require "petrarca/isbn10"
+require "petrarca/helpers"
 
 
-module ISBNUtils
+module Petrarca
   class Error < StandardError; end
   class IncorrectFormatError < StandardError; end
 

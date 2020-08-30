@@ -1,4 +1,4 @@
-module ISBNUtils
+module Petrarca
   module Helpers
 
     def split_to_parts(body, ranges)
