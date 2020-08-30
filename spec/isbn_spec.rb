@@ -69,7 +69,7 @@ RSpec.describe ISBNUtils do
     end
   end
 
-  describe "retruns hyphenated isbn" do
+  describe "hyphenate" do
     context "isbn13" do
       it "returns hyphenated for valid isbn13" do
         expect(ISBNUtils.hyphenate(valid_isbn13.delete("-"))).to eq valid_isbn13
@@ -88,6 +88,18 @@ RSpec.describe ISBNUtils do
       it "returns hyphenated for also invalid isbn10" do
         expect(ISBNUtils.hyphenate(invalid_isbn10.delete("-"))).to eq invalid_isbn10
       end
+    end
+  end
+
+  describe "to_10" do
+    it "returns isbn10" do
+      expect(ISBNUtils.to_10(valid_isbn13)).to eq valid_isbn10
+    end
+  end
+
+  describe "to_13" do
+    it "returns isbn13" do
+      expect(ISBNUtils.to_13(valid_isbn10)).to eq valid_isbn13
     end
   end
 
