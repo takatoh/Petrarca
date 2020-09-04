@@ -14,10 +14,4 @@ RSpec.describe Petrarca::Helpers do
     end
   end
 
-  describe "hyphenate13" do
-    it "returns hyphenated isbn13" do
-      expect(hyphenate13(isbn13)).to eq isbn13_hyphenated
-    end
-  end
-
 end
