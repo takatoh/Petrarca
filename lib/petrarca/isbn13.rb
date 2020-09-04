@@ -16,16 +16,16 @@ module Petrarca
     end
 
     def calc_check_digit(isbn)
-      nums = isbn.delete("-").split("")[0..11].map{|x| x.to_i }
+      nums = isbn.delete("-").split("")[0, 12].map{|x| x.to_i }
       sum = nums.zip([1, 3] * 6).map{|x, y| x * y }.inject(:+)
       check_digit = 10 - (sum % 10)
       check_digit == 10 ? "0" : check_digit.to_s
     end
 
     def hyphenate(isbn)
-      ean_prefix = isbn[0..2]
-      body = isbn[3..11]
-      check_digit = isbn[12..12]
+      ean_prefix = isbn[0, 3]
+      body = isbn[3, 9]
+      check_digit = isbn[12, 1]
       registration_group, body = Helpers.split_to_parts(body, REGISTRATION_GROUP_RANGES[ean_prefix])
       prefix = "#{ean_prefix}-#{registration_group}"
       registrant, publication = Helpers.split_to_parts(body, REGISTRANT_RANGES[prefix])
