@@ -16,7 +16,7 @@ module Petrarca
     end
 
     def calc_check_digit(isbn)
-      nums = isbn.delete("-").split("")[0..8].map{|x| x.to_i }
+      nums = isbn.delete("-").split("")[0, 9].map{|x| x.to_i }
       sum = nums.zip((2..10).to_a.reverse).map{|x, y| x * y }.inject(:+)
       check_digit = 11 - (sum % 11)
       case check_digit
