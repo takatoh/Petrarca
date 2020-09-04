@@ -4,8 +4,6 @@ require "petrarca/helpers"
 module Petrarca
   module ISBN10
 
-    include Helpers
-
     extend self
 
     def valid?(isbn)
