@@ -2,13 +2,15 @@ module Petrarca
   module Helpers
 
     def split_to_parts(body, ranges)
-      g = ""
-      ranges.each do |range_str|
+      ranges.map do |range_str|
         s, e = range_str.split("-")
-        g = body[0..(s.size - 1)]
-        break if Range.new(s.to_i, e.to_i).cover?(g.to_i)
-      end
-      [g, body[(g.size)..]]
+        prefix = body[0..(s.size - 1)]
+        if Range.new(s.to_i, e.to_i).cover?(prefix.to_i)
+          [prefix, body[(prefix.size)..]]
+        else
+          nil
+        end
+      end.compact.first
     end
 
     def hyphenate13(isbn)
