@@ -4,8 +4,6 @@ require "petrarca/helpers"
 module Petrarca
   module ISBN13
 
-    include Helpers
-
     extend self
 
     def valid?(isbn)
@@ -28,9 +26,9 @@ module Petrarca
       ean_prefix = isbn[0..2]
       body = isbn[3..11]
       check_digit = isbn[12..12]
-      registration_group, body = split_to_parts(body, REGISTRATION_GROUP_RANGES[ean_prefix])
+      registration_group, body = Helpers.split_to_parts(body, REGISTRATION_GROUP_RANGES[ean_prefix])
       prefix = "#{ean_prefix}-#{registration_group}"
-      registrant, publication = split_to_parts(body, REGISTRANT_RANGES[prefix])
+      registrant, publication = Helpers.split_to_parts(body, REGISTRANT_RANGES[prefix])
       [ean_prefix, registration_group, registrant, publication, check_digit].join("-")
     end
 
