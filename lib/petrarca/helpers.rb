@@ -6,7 +6,7 @@ module Petrarca
     def split_to_parts(body, ranges)
       ranges.map do |range_str|
         s, e = range_str.split("-")
-        prefix = body[0..(s.size - 1)]
+        prefix = body[0, s.size]
         if Range.new(s.to_i, e.to_i).cover?(prefix.to_i)
           [prefix, body[(prefix.size)..]]
         else
