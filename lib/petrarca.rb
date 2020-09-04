@@ -59,12 +59,12 @@ module Petrarca
   end
 
   def to_10(isbn13)
-    s = isbn13.to_s.delete("-")[3..11]
+    s = isbn13.to_s.delete("-")[3, 9]
     ISBN10.hyphenate(s + ISBN10.calc_check_digit(s))
   end
 
   def to_13(isbn10)
-    s = "978" + isbn10.to_s.delete("-")[0..8]
+    s = "978" + isbn10.to_s.delete("-")[0, 9]
     ISBN13.hyphenate(s + ISBN13.calc_check_digit(s))
   end
 
