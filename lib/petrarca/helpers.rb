@@ -1,6 +1,8 @@
 module Petrarca
   module Helpers
 
+    extend self
+
     def split_to_parts(body, ranges)
       ranges.map do |range_str|
         s, e = range_str.split("-")
@@ -14,7 +16,7 @@ module Petrarca
     end
 
 
-    def self.load_ranges(range_file)
+    def load_ranges(range_file)
       ranges = {}
       File.open(range_file, "r") do |f|
         f.each_line do |line|
