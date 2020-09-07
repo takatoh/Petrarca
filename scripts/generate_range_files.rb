@@ -17,27 +17,18 @@ def main
   registration_groups = extract_ranges(doc.xpath("//EAN.UCC"))
   registrants = extract_ranges(doc.xpath("//Group"))
 
-  File.open(REGISTRATION_GROUP_RANGES_FILE, "w") do |f|
-    f.puts "# " + source
-    f.puts "# " + date
-    f.puts "#"
-    registration_groups.each do |group|
-      f.puts "# " + group["agency"]
-      f.puts group["prefix"] + ":" + group["ranges"].join(",")
-    end
-  end
-  $stderr.puts "Generated: #{REGISTRATION_GROUP_RANGES_FILE}"
-
-  File.open(REGISTRANT_RANGES_FILE, "w") do |f|
-    f.puts "# " + source
-    f.puts "# " + date
-    f.puts "#"
-    registrants.each do |registrant|
-      f.puts "# " + registrant["agency"]
-      f.puts registrant["prefix"] + ":" + registrant["ranges"].join(",")
-    end
-  end
-  $stderr.puts "Generated: #{REGISTRANT_RANGES_FILE}"
+  output_range_file(
+    registration_groups,
+    REGISTRATION_GROUP_RANGES_FILE,
+    source,
+    date
+  )
+  output_range_file(
+    registrants,
+    REGISTRANT_RANGES_FILE,
+    source,
+    date
+  )
 end
 
 def extract_ranges(nodes)
@@ -61,6 +52,19 @@ def extract_ranges(nodes)
   end
 end
 
+def output_range_file(ranges, range_file, source, date)
+  File.open(range_file, "w") do |f|
+    f.puts "# " + source
+    f.puts "# " + date
+    f.puts "#"
+    ranges.each do |range|
+      f.puts "# " + range["agency"]
+      f.puts range["prefix"] + ":" + range["ranges"].join(",")
+    end
+  end
+  $stderr.puts "Generated: #{range_file}"
+end
+
+
 
 main
-
