@@ -54,6 +54,8 @@ end
 
 def output_range_file(ranges, range_file, metadata)
   File.open(range_file, "w") do |f|
+    f.puts "# Generated from RangeMessage.xml file, downloaded from https://www.isbn-international.org/range_file_generation."
+    f.puts "#"
     f.puts "# " + metadata[:source]
     f.puts "# " + metadata[:date]
     f.puts "#"
