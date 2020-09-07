@@ -14,44 +14,8 @@ def main
   source = doc.xpath("//MessageSource").text
   date = doc.xpath("//MessageDate").text
 
-  registration_groups = doc.xpath("//EAN.UCC").map do |node|
-    prefix = node.xpath("Prefix").text
-    agency = node.xpath("Agency").text
-    ranges = node.xpath("Rules/Rule").map do |rule|
-      length = rule.xpath("Length").text.to_i
-      range = if length.zero?
-        nil
-      else
-        rule.xpath("Range").text.split("-").map{|s| s[0, length] }.join("-")
-      end
-      range
-    end.compact
-    {
-      "prefix" => prefix,
-      "agency" => agency,
-      "ranges" => ranges
-    }
-  end
-
-  registrants = doc.xpath("//Group").map do |node|
-    prefix = node.xpath("Prefix").text
-    agency = node.xpath("Agency").text
-    ranges = node.xpath("Rules/Rule").map do |rule|
-      length = rule.xpath("Length").text.to_i
-      range = if length.zero?
-        nil
-      else
-        rule.xpath("Range").text.split("-").map{|s| s[0, length] }.join("-")
-      end
-      range
-    end.compact
-    {
-      "prefix" => prefix,
-      "agency" => agency,
-      "ranges" => ranges
-    }
-  end
-
+  registration_groups = extract_ranges(doc.xpath("//EAN.UCC"))
+  registrants = extract_ranges(doc.xpath("//Group"))
 
   File.open(REGISTRATION_GROUP_RANGES_FILE, "w") do |f|
     f.puts "# " + source
@@ -74,6 +38,27 @@ def main
     end
   end
   $stderr.puts "Generated: #{REGISTRANT_RANGES_FILE}"
+end
+
+def extract_ranges(nodes)
+  nodes.map do |node|
+    prefix = node.xpath("Prefix").text
+    agency = node.xpath("Agency").text
+    ranges = node.xpath("Rules/Rule").map do |rule|
+      length = rule.xpath("Length").text.to_i
+      range = if length > 0
+        rule.xpath("Range").text.split("-").map{|s| s[0, length] }.join("-")
+      else
+        nil
+      end
+      range
+    end.compact
+    {
+      "prefix" => prefix,
+      "agency" => agency,
+      "ranges" => ranges
+    }
+  end
 end
 
 
