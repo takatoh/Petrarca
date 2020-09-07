@@ -11,8 +11,10 @@ REGISTRANT_RANGES_FILE = "registrant_ranges.txt"
 def main
   doc = File.open(RANGE_MESSAGE_FILE, "r"){|f| Nokogiri::XML(f) }
 
-  source = doc.xpath("//MessageSource").text
-  date = doc.xpath("//MessageDate").text
+  metadata = {
+    source: doc.xpath("//MessageSource").text,
+    date: doc.xpath("//MessageDate").text
+  }
 
   registration_groups = extract_ranges(doc.xpath("//EAN.UCC"))
   registrants = extract_ranges(doc.xpath("//Group"))
@@ -20,14 +22,12 @@ def main
   output_range_file(
     registration_groups,
     REGISTRATION_GROUP_RANGES_FILE,
-    source,
-    date
+    metadata
   )
   output_range_file(
     registrants,
     REGISTRANT_RANGES_FILE,
-    source,
-    date
+    metadata
   )
 end
 
@@ -52,10 +52,10 @@ def extract_ranges(nodes)
   end
 end
 
-def output_range_file(ranges, range_file, source, date)
+def output_range_file(ranges, range_file, metadata)
   File.open(range_file, "w") do |f|
-    f.puts "# " + source
-    f.puts "# " + date
+    f.puts "# " + metadata[:source]
+    f.puts "# " + metadata[:date]
     f.puts "#"
     ranges.each do |range|
       f.puts "# " + range["agency"]
