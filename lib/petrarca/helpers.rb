@@ -22,7 +22,7 @@ module Petrarca
         f.each_line do |line|
           next if line.start_with?("#")
           g, r = line.chomp.split(":")
-          ranges[g] = r.split(",")
+          ranges[g] = r.split(",") unless r.nil?
         end
       end
       ranges
