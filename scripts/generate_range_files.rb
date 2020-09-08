@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require "nokogiri"
+require "optparse"
 
 
 RANGE_MESSAGE_FILE = "RangeMessage.xml"
@@ -9,6 +10,15 @@ REGISTRANT_RANGES_FILE = "registrant_ranges.txt"
 
 
 def main
+  options = {
+    dir: "."
+  }
+  opts = OptionParser.new
+  opts.on("-d", "--dir=DIR", String, "Set directory, output range fiels into."){|v|
+    options[:dir] = v
+  }
+  opts.parse!
+
   doc = File.open(RANGE_MESSAGE_FILE, "r"){|f| Nokogiri::XML(f) }
 
   metadata = {
@@ -21,12 +31,12 @@ def main
 
   output_range_file(
     registration_groups,
-    REGISTRATION_GROUP_RANGES_FILE,
+    File.join(options[:dir], REGISTRATION_GROUP_RANGES_FILE),
     metadata
   )
   output_range_file(
     registrants,
-    REGISTRANT_RANGES_FILE,
+    File.join(options[:dir], REGISTRANT_RANGES_FILE),
     metadata
   )
 end
