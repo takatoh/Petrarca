@@ -9,7 +9,8 @@ This library Petrarca provides some utility functions to manipulate ISBN numbers
 
 All functions support both ISBN-13 and ISBN-10.
 
-Note: Only registrant ranges for Japan are currently supported.
+All ranges of registration groups and registrants are supported.
+Those depends on 'RangeMessage.xml' file, downloaded from [International ISBN Agency](https://www.isbn-international.org/range_file_generation).
 
 ## Installation
 
