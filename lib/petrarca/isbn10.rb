@@ -30,8 +30,8 @@ module Petrarca
     end
 
     def hyphenate(isbn)
-      s = ISBN13.hyphenate("978" + isbn.to_s)
-      s.sub(/^978-/, "")
+      parts = Helpers.split("978" + isbn.to_s)
+      parts.drop(1).join("-")
     end
 
   end
