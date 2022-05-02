@@ -15,7 +15,7 @@ module Petrarca
   extend self
 
   def valid?(isbn)
-    case isbn.delete("-").size
+    case isbn.to_s.delete("-").size
     when 13
       ISBN13.valid?(isbn)
     when 10
@@ -26,7 +26,7 @@ module Petrarca
   end
 
   def correct_format?(isbn)
-    case isbn.delete("-").size
+    case isbn.to_s.delete("-").size
     when 13
       ISBN13.correct_format?(isbn)
     when 10
@@ -37,7 +37,7 @@ module Petrarca
   end
 
   def calc_check_digit(isbn)
-    isbn = isbn.delete("-")
+    isbn = isbn.to_s.delete("-")
     case isbn.size
     when 12, 13
       ISBN13.calc_check_digit(isbn)
