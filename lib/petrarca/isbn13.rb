@@ -23,6 +23,10 @@ module Petrarca
     end
 
     def hyphenate(isbn)
+      split(isbn).join("-")
+    end
+
+    private def split(isbn)
       isbn = isbn.to_s
       ean_prefix = isbn[0, 3]
       body = isbn[3, 9]
@@ -30,7 +34,7 @@ module Petrarca
       registration_group, body = Helpers.split_to_parts(body, REGISTRATION_GROUP_RANGES[ean_prefix])
       prefix = "#{ean_prefix}-#{registration_group}"
       registrant, publication = Helpers.split_to_parts(body, REGISTRANT_RANGES[prefix])
-      [ean_prefix, registration_group, registrant, publication, check_digit].join("-")
+      [ean_prefix, registration_group, registrant, publication, check_digit]
     end
 
   end
