@@ -1,5 +1,6 @@
 module Petrarca
 
+  class InvalidEANPrefixError < StandardError; end
   class InvalidRangeError < StandardError; end
 
   module Helpers
@@ -9,6 +10,9 @@ module Petrarca
     def split(isbn)
       isbn = isbn.to_s.delete("-")
       ean_prefix = isbn[0, 3]
+      unless ean_prefix == "978" || ean_prefix == "979"
+        raise InvalidEANPrefixError.new("Invalid EAN prefix: #{ean_prefix}")
+      end
       body = isbn[3, 9]
       check_digit = isbn[12, 1]
       begin
