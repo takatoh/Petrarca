@@ -7,16 +7,25 @@ module Petrarca
     extend self
 
     def valid?(isbn)
-      correct_format?(isbn) && isbn[-1] == calc_check_digit(isbn)
+      isbn = isbn.to_s
+      if correct_format?(isbn) && isbn[-1] == calc_check_digit(isbn)
+        if isbn.include?("-")
+          Helpers.split("978" + isbn).drop(1) == isbn.split("-")
+        else
+          true
+        end
+      else
+        false
+      end
     end
 
     def correct_format?(isbn)
-      isbn = isbn.delete("-")
+      isbn = isbn.to_s.delete("-")
       !!(/\A\d{9}[0-9X]\z/ =~ isbn)
     end
 
     def calc_check_digit(isbn)
-      nums = isbn.delete("-").split("")[0, 9].map{|x| x.to_i }
+      nums = isbn.to_s.delete("-").split("")[0, 9].map{|x| x.to_i }
       sum = nums.zip((2..10).to_a.reverse).map{|x, y| x * y }.inject(:+)
       check_digit = 11 - (sum % 11)
       case check_digit
@@ -30,8 +39,7 @@ module Petrarca
     end
 
     def hyphenate(isbn)
-      s = ISBN13.hyphenate("978" + isbn)
-      s.sub(/^978-/, "")
+      Helpers.split("978" + isbn.to_s).drop(1).join("-")
     end
 
   end
