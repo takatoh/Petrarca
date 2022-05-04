@@ -1,4 +1,7 @@
 module Petrarca
+
+  class InvalidRangeError < StandardError; end
+
   module Helpers
 
     extend self
@@ -8,15 +11,23 @@ module Petrarca
       ean_prefix = isbn[0, 3]
       body = isbn[3, 9]
       check_digit = isbn[12, 1]
-      registration_group, body = Helpers.split_to_parts(body, REGISTRATION_GROUP_RANGES[ean_prefix])
+      begin
+        registration_group, body = Helpers.split_to_parts(body, REGISTRATION_GROUP_RANGES[ean_prefix])
+      rescue InvalidRangeError
+        raise InvalidRangeError.new("Registration group is not defined: #{body} (under #{ean_prefix})")
+      end
       prefix = "#{ean_prefix}-#{registration_group}"
-      registrant, publication = Helpers.split_to_parts(body, REGISTRANT_RANGES[prefix])
+      begin
+        registrant, publication = Helpers.split_to_parts(body, REGISTRANT_RANGES[prefix])
+      rescue InvalidRangeError
+        raise InvalidRangeError.new("Registrant is not defined: #{body} (under #{prefix})")
+      end
       [ean_prefix, registration_group, registrant, publication, check_digit]
     end
 
 
     def split_to_parts(body, ranges)
-      ranges.map do |range_str|
+      parts = ranges.map do |range_str|
         s, e = range_str.split("-")
         prefix = body[0, s.size]
         if Range.new(s.to_i, e.to_i).cover?(prefix.to_i)
@@ -24,7 +35,12 @@ module Petrarca
         else
           nil
         end
-      end.compact.first
+      end.compact
+      unless parts.empty?
+        parts.first
+      else
+        raise InvalidRangeError.new(body)
+      end
     end
 
 
