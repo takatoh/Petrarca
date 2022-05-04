@@ -47,7 +47,7 @@ Or install it yourself as:
 
 SINCE v0.5.0
 
-Accept Integer as ISBN, only if no '-' and 'X' including.
+Accept Integer as ISBN, only if no `-` and `X` including.
 
     irb(main):001:0> require 'petrarca'
     => true
