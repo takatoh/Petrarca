@@ -7,7 +7,16 @@ module Petrarca
     extend self
 
     def valid?(isbn)
-      correct_format?(isbn) && isbn[-1] == calc_check_digit(isbn)
+      isbn = isbn.to_s
+      if correct_format?(isbn) && isbn[-1] == calc_check_digit(isbn)
+        if isbn.include?("-")
+          Helpers.split(isbn) == isbn.split("-")
+        else
+          true
+        end
+      else
+        false
+      end
     end
 
     def correct_format?(isbn)
