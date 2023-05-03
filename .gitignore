@@ -10,3 +10,4 @@
 /Gemfile.lock
 *.txt
 *.xml
+.ruby-version
