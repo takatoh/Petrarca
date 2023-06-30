@@ -45,9 +45,9 @@ Or install it yourself as:
     irb(main):006:0> Petrarca.hyphenate("9784815606442")
     => "978-4-8156-0644-2"
 
-SINCE v0.5.0
-
 Accept Integer as ISBN, only if no `-` and `X` including.
+
+New in v0.5.0.
 
     irb(main):001:0> require 'petrarca'
     => true
@@ -60,7 +60,7 @@ Accept Integer as ISBN, only if no `-` and `X` including.
     irb(main):005:0> Petrarca.hyphenate(9784815606442)
     => "978-4-8156-0644-2"
 
-If the ISBN is hyphenated, consider registration group and registrant in `Petrarca.valid?`. The second example below has the invalid registrant.
+If the ISBN is hyphenated, registration group and registrant are considered in `Petrarca.valid?`. The second example below has the invalid registrant.
 
     irb(main):006:0> Petrarca.valid?("978-4-8156-0644-2")
     => true
