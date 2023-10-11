@@ -15,7 +15,7 @@ module Petrarca
   extend self
 
   def valid?(isbn)
-    case isbn.to_s.delete("-").size
+    case dehyphenate(isbn).size
     when 13
       ISBN13.valid?(isbn)
     when 10
@@ -26,7 +26,7 @@ module Petrarca
   end
 
   def correct_format?(isbn)
-    case isbn.to_s.delete("-").size
+    case dehyphenate(isbn).size
     when 13
       ISBN13.correct_format?(isbn)
     when 10
@@ -37,7 +37,7 @@ module Petrarca
   end
 
   def calc_check_digit(isbn)
-    isbn = isbn.to_s.delete("-")
+    isbn = dehyphenate(isbn)
     case isbn.size
     when 12, 13
       ISBN13.calc_check_digit(isbn)
@@ -46,6 +46,10 @@ module Petrarca
     else
       raise IncorrectFormatError
     end
+  end
+
+  def dehyphenate(isbn)
+    isbn.to_s.delete("-")
   end
 
   def hyphenate(isbn)
@@ -59,12 +63,12 @@ module Petrarca
   end
 
   def to_10(isbn13)
-    s = isbn13.to_s.delete("-")[3, 9]
+    s = dehyphenate(isbn13)[3, 9]
     ISBN10.hyphenate(s + ISBN10.calc_check_digit(s))
   end
 
   def to_13(isbn10)
-    s = "978" + isbn10.to_s.delete("-")[0, 9]
+    s = "978" + dehyphenate(isbn10)[0, 9]
     ISBN13.hyphenate(s + ISBN13.calc_check_digit(s))
   end
 

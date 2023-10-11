@@ -20,12 +20,12 @@ module Petrarca
     end
 
     def correct_format?(isbn)
-      isbn = isbn.to_s.delete("-")
+      isbn = dehyphenate(isbn)
       !!(/\A\d{9}[0-9X]\z/ =~ isbn)
     end
 
     def calc_check_digit(isbn)
-      nums = isbn.to_s.delete("-").split("")[0, 9].map{|x| x.to_i }
+      nums = dehyphenate(isbn).split("")[0, 9].map{|x| x.to_i }
       sum = nums.zip((2..10).to_a.reverse).map{|x, y| x * y }.inject(:+)
       check_digit = 11 - (sum % 11)
       case check_digit
@@ -36,6 +36,10 @@ module Petrarca
       else
         check_digit.to_s
       end
+    end
+    
+    def dehyphenate(isbn)
+      Petrarca.dehyphenate(isbn)
     end
 
     def hyphenate(isbn)
