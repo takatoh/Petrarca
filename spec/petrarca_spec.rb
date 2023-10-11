@@ -4,12 +4,19 @@ require_relative "../lib/petrarca"
 RSpec.describe Petrarca do
 
   let(:valid_isbn13) { "978-4-8156-0644-2" }
+  let(:valid_isbn13_dehyphenated) { "9784815606442"}
   let(:invalid_isbn13) { "978-4-8156-0644-0" }
+  let(:invalid_isbn13_dehyphenated) { "9784815606440" }
   let(:correct_check_digit_isbn13) { "2" }
+
   let(:valid_isbn10) { "4-8156-0644-7" }
+  let(:valid_isbn10_dehyphenated) { "4815606447"}
   let(:invalid_isbn10) { "4-8156-0644-0" }
+  let(:invalid_isbn10_dehyphenated) { "4815606440" }
   let(:correct_check_digit_isbn10) { "7" }
+
   let(:nonsence_isbn) { "1-234-567-8" }
+
 
   describe "valid?" do
     context "isbn13" do
@@ -72,21 +79,43 @@ RSpec.describe Petrarca do
   describe "hyphenate" do
     context "isbn13" do
       it "returns hyphenated for valid isbn13" do
-        expect(Petrarca.hyphenate(valid_isbn13.delete("-"))).to eq valid_isbn13
+        expect(Petrarca.hyphenate(valid_isbn13_dehyphenated)).to eq valid_isbn13
       end
 
       it "returns hyphenated for also invalid isbn13" do
-        expect(Petrarca.hyphenate(invalid_isbn13.delete("-"))).to eq invalid_isbn13
+        expect(Petrarca.hyphenate(invalid_isbn13_dehyphenated)).to eq invalid_isbn13
       end
     end
 
     context "isbn10" do
       it "returns hyphenated for valid isbn10" do
-        expect(Petrarca.hyphenate(valid_isbn10.delete("-"))).to eq valid_isbn10
+        expect(Petrarca.hyphenate(valid_isbn10_dehyphenated)).to eq valid_isbn10
       end
 
       it "returns hyphenated for also invalid isbn10" do
-        expect(Petrarca.hyphenate(invalid_isbn10.delete("-"))).to eq invalid_isbn10
+        expect(Petrarca.hyphenate(invalid_isbn10_dehyphenated)).to eq invalid_isbn10
+      end
+    end
+  end
+
+  describe "dehyphenate" do
+    context "isbn13" do
+      it "returns dehyphenated for valid isbn13" do
+        expect(Petrarca.dehyphenate(valid_isbn13)).to eq valid_isbn13_dehyphenated
+      end
+
+      it "returns dehyphenated for also invalid isbn13" do
+        expect(Petrarca.dehyphenate(invalid_isbn13)).to eq invalid_isbn13_dehyphenated
+      end
+    end
+
+    context "isbn10" do
+      it "returns dehyphenated for valid isbn10" do
+        expect(Petrarca.dehyphenate(valid_isbn10)).to eq valid_isbn10_dehyphenated
+      end
+
+      it "returns dehyphenated for also invalid isbn10" do
+        expect(Petrarca.dehyphenate(invalid_isbn10)).to eq invalid_isbn10_dehyphenated
       end
     end
   end
