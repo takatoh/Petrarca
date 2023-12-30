@@ -62,6 +62,16 @@ module Petrarca
     end
   end
 
+  def split(isbn)
+    isbn = isbn.to_s
+    case isbn.size
+    when 13
+      ISBN13.split(isbn)
+    when 10
+      ISBN10.split(isbn)
+    end
+  end
+
   def to_10(isbn13)
     s = dehyphenate(isbn13)[3, 9]
     ISBN10.hyphenate(s + ISBN10.calc_check_digit(s))

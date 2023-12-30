@@ -43,7 +43,11 @@ module Petrarca
     end
 
     def hyphenate(isbn)
-      Helpers.split("978" + isbn.to_s).drop(1).join("-")
+      split(isbn).join("-")
+    end
+
+    def split(isbn)
+      Helpers.split("978" + isbn.to_s).drop(1)
     end
 
   end

@@ -36,7 +36,11 @@ module Petrarca
     end
 
     def hyphenate(isbn)
-      Helpers.split(isbn).join("-")
+      split(isbn).join("-")
+    end
+
+    def split(isbn)
+      Helpers.split(isbn)
     end
 
   end
