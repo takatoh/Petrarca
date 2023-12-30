@@ -5,7 +5,7 @@ This library Petrarca provides some utility functions to manipulate ISBN numbers
 - Validation
 - Calculate check digit
 - Mutual conversion of ISBN-13 and ISBN-10
-- Hyphenation
+- Hyphenation / Dehyphenation
 
 All functions support both ISBN-13 and ISBN-10.
 
