@@ -46,11 +46,11 @@ RSpec.describe Petrarca::ISBN13 do
 
   describe "dehyphenate" do
     it "returns dehyphenated for valid isbn13" do
-      expect(Petrarca::ISBN10.dehyphenate(valid_isbn13)).to eq valid_isbn13_dehyphenated
+      expect(Petrarca::ISBN13.dehyphenate(valid_isbn13)).to eq valid_isbn13_dehyphenated
     end
 
     it "returns dehyphenated for also invalid isbn13" do
-      expect(Petrarca::ISBN10.dehyphenate(invalid_isbn13)).to eq invalid_isbn13_dehyphenated
+      expect(Petrarca::ISBN13.dehyphenate(invalid_isbn13)).to eq invalid_isbn13_dehyphenated
     end
   end
 
