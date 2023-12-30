@@ -8,7 +8,7 @@ module Petrarca
     extend self
 
     def split(isbn)
-      isbn = isbn.to_s.delete("-")
+      isbn = Petrarca.dehyphenate(isbn)
       ean_prefix = isbn[0, 3]
       unless ean_prefix == "978" || ean_prefix == "979"
         raise InvalidEANPrefixError.new("Invalid EAN prefix: #{ean_prefix}")

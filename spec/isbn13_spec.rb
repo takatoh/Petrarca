@@ -4,7 +4,9 @@ require_relative "../lib/petrarca"
 RSpec.describe Petrarca::ISBN13 do
 
   let(:valid_isbn13) { "978-4-8156-0644-2" }
+  let(:valid_isbn13_dehyphenated) { "9784815606442" }
   let(:invalid_isbn13) { "978-4-8156-0644-0" }
+  let(:invalid_isbn13_dehyphenated) { "9784815606440" }
   let(:correct_check_digit) { "2" }
 
   describe "valid?" do
@@ -33,12 +35,22 @@ RSpec.describe Petrarca::ISBN13 do
 
   describe "hyphenate" do
     it "returns hyphenated for valid isbn13" do
-      expect(Petrarca::ISBN13.hyphenate(valid_isbn13.delete("-"))).to eq valid_isbn13
+      expect(Petrarca::ISBN13.hyphenate(valid_isbn13_dehyphenated)).to eq valid_isbn13
     end
 
     it "returns hyphenated for also invalid isbn13" do
-      expect(Petrarca::ISBN13.hyphenate(invalid_isbn13.delete("-"))).to eq invalid_isbn13
+      expect(Petrarca::ISBN13.hyphenate(invalid_isbn13_dehyphenated)).to eq invalid_isbn13
     end
   end
 
+  describe "dehyphenate" do
+    it "returns dehyphenated for valid isbn13" do
+      expect(Petrarca::ISBN10.dehyphenate(valid_isbn13)).to eq valid_isbn13_dehyphenated
+    end
+
+    it "returns dehyphenated for also invalid isbn13" do
+      expect(Petrarca::ISBN10.dehyphenate(invalid_isbn13)).to eq invalid_isbn13_dehyphenated
+    end
+  end
+    
 end

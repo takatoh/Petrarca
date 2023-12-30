@@ -44,6 +44,8 @@ Or install it yourself as:
     => "978-4-8156-0644-2"
     irb(main):006:0> Petrarca.hyphenate("9784815606442")
     => "978-4-8156-0644-2"
+    irb(main):007:0> Petrarca.dehyphenate("978-4-8156-0644-2")
+    => "9784815605442"
 
 Accept Integer as ISBN, only if no `-` and `X` including.
 
