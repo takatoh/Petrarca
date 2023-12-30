@@ -46,10 +46,10 @@ Or install it yourself as:
     => "978-4-8156-0644-2"
     irb(main):007:0> Petrarca.dehyphenate("978-4-8156-0644-2")
     => "9784815605442"
+    irb(main):008:0> Petrarca.split("9784815606442")
+    => ["978", "4", "8156", "0644", "2"]
 
-Accept Integer as ISBN, only if no `-` and `X` including.
-
-New in v0.5.0.
+Accept Integer as ISBN, only if no `-` and `X` including. (New in v0.5.0)
 
     irb(main):001:0> require 'petrarca'
     => true
