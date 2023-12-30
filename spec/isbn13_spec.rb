@@ -8,6 +8,7 @@ RSpec.describe Petrarca::ISBN13 do
   let(:invalid_isbn13) { "978-4-8156-0644-0" }
   let(:invalid_isbn13_dehyphenated) { "9784815606440" }
   let(:correct_check_digit) { "2" }
+  let(:splited_isbn13) { ["978", "4", "8156", "0644", "2"] }
 
   describe "valid?" do
     it "returns true for valid isbn13" do
@@ -52,5 +53,11 @@ RSpec.describe Petrarca::ISBN13 do
       expect(Petrarca::ISBN10.dehyphenate(invalid_isbn13)).to eq invalid_isbn13_dehyphenated
     end
   end
-    
+
+  describe "split" do
+    it "returns a array that splited isbn13 to" do
+      expect(Petrarca::ISBN13.split(valid_isbn13_dehyphenated)).to eq splited_isbn13
+    end
+  end
+
 end
