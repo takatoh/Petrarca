@@ -6,13 +6,14 @@ This library Petrarca provides some utility functions to manipulate ISBN numbers
 - Calculate check digit
 - Mutual conversion of ISBN-13 and ISBN-10
 - Hyphenation / Dehyphenation
+- Split to a array that includes ISBN segments
 
 All functions support both ISBN-13 and ISBN-10.
 
 All ranges of registration groups and registrants are supported.
 Those depends on 'RangeMessage.xml' file, downloaded from [International ISBN Agency](https://www.isbn-international.org/range_file_generation).
 
-NOTE: Updated range files to latest version on September 8, 2023.
+NOTE: Updated range files to latest version on December 30, 2023.
 
 ## Installation
 
@@ -48,6 +49,8 @@ Or install it yourself as:
     => "9784815605442"
     irb(main):008:0> Petrarca.split("9784815606442")
     => ["978", "4", "8156", "0644", "2"]
+
+`Petrarca.dehyphenate` and `Petrarca.split` are new in v0.6.0.
 
 Accept Integer as ISBN, only if no `-` and `X` including. (New in v0.5.0)
 
