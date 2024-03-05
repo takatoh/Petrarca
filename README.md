@@ -13,7 +13,7 @@ All functions support both ISBN-13 and ISBN-10.
 All ranges of registration groups and registrants are supported.
 Those depends on 'RangeMessage.xml' file, downloaded from [International ISBN Agency](https://www.isbn-international.org/range_file_generation).
 
-NOTE: Updated range files to latest version on February 4, 2024.
+NOTE: Updated range files to latest version on March 5, 2024.
 
 ## Installation
 
