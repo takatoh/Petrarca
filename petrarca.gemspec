@@ -15,6 +15,8 @@ Gem::Specification.new do |spec|
 
   spec.licenses      = ["MIT"]
 
+  spec.required_ruby_version = ">= 3.0.0"
+
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
 #  if spec.respond_to?(:metadata)
@@ -38,9 +40,4 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "isbnranges"
-
-  spec.add_development_dependency "bundler", "~> 2.0"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", ">= 3.0.0"
-  spec.add_development_dependency "nokogiri"
 end
