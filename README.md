@@ -6,21 +6,21 @@ This library Petrarca provides some utility functions to manipulate ISBN numbers
 - Calculate check digit
 - Mutual conversion of ISBN-13 and ISBN-10
 - Hyphenation / Dehyphenation
-- Split to a array that includes ISBN segments
+- Split to an array that includes ISBN segments
 
 All functions support both ISBN-13 and ISBN-10.
 
 All ranges of registration groups and registrants are supported.
-Those depends on 'RangeMessage.xml' file, downloaded from [International ISBN Agency](https://www.isbn-international.org/range_file_generation).
+Those depend indirectly on data published by the [International ISBN agency](https://www.isbn-international.org/) through 'isbnranges' gem.
 
-NOTE: Updated range files to latest version on August 4, 2024.
+NOTE: **The range files have been removed. Instead, the data provided by 'isbnranges' gem is used.** See https://github.com/takatoh/ISBNRanges for more information.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'petrarca'
+gem "petrarca"
 ```
 
 And then execute:
@@ -33,7 +33,7 @@ Or install it yourself as:
 
 ## Usage
 
-    irb(main):001:0> require 'petrarca'
+    irb(main):001:0> require "petrarca"
     => true
     irb(main):002:0> Petrarca.valid?("978-4-8156-0644-2")
     => true
