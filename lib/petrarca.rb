@@ -2,15 +2,15 @@ require "petrarca/version"
 require "petrarca/isbn13"
 require "petrarca/isbn10"
 require "petrarca/helpers"
+require "isbnranges"
 
 
 module Petrarca
   class Error < StandardError; end
   class IncorrectFormatError < StandardError; end
 
-  data_dir = __dir__ + "/../data"
-  REGISTRATION_GROUP_RANGES = Helpers.load_ranges("#{data_dir}/registration_group_ranges.txt")
-  REGISTRANT_RANGES = Helpers.load_ranges("#{data_dir}/registrant_ranges.txt")
+  REGISTRATION_GROUP_RANGES = ISBNRanges::REGISTRATION_GROUP_RANGES
+  REGISTRANT_RANGES = ISBNRanges::REGISTRANT_RANGES
 
   extend self
 

@@ -31,8 +31,8 @@ module Petrarca
 
 
     def split_to_parts(body, ranges)
-      parts = ranges.map do |range_str|
-        s, e = range_str.split("-")
+      parts = ranges.map do |range|
+        s, e = range
         prefix = body[0, s.size]
         if Range.new(s.to_i, e.to_i).cover?(prefix.to_i)
           [prefix, body[(prefix.size)..]]
@@ -45,19 +45,6 @@ module Petrarca
       else
         raise InvalidRangeError.new(body)
       end
-    end
-
-
-    def load_ranges(range_file)
-      ranges = {}
-      File.open(range_file, "r") do |f|
-        f.each_line do |line|
-          next if line.start_with?("#")
-          g, r = line.chomp.split(":")
-          ranges[g] = r.split(",") unless r.nil?
-        end
-      end
-      ranges
     end
 
   end
