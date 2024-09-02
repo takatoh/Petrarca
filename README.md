@@ -13,7 +13,9 @@ All functions support both ISBN-13 and ISBN-10.
 All ranges of registration groups and registrants are supported.
 Those depend indirectly on data published by the [International ISBN agency](https://www.isbn-international.org/) through 'isbnranges' gem.
 
-NOTE: **The range files have been removed. Instead, the data provided by 'isbnranges' gem is used.** See https://github.com/takatoh/ISBNRanges for more information.
+**The range files have been removed. Instead, the data provided by 'isbnranges' gem is used.** See https://github.com/takatoh/ISBNRanges for more information.
+
+**No longer update just for range files.**
 
 ## Installation
 
