@@ -31,8 +31,8 @@ module Petrarca
 
 
     def split_to_parts(body, ranges)
-      parts = ranges.map do |range_str|
-        s, e = range_str.split("-")
+      parts = ranges.map do |range|
+        s, e = range
         prefix = body[0, s.size]
         if Range.new(s.to_i, e.to_i).cover?(prefix.to_i)
           [prefix, body[(prefix.size)..]]
