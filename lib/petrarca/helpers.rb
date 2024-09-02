@@ -34,7 +34,7 @@ module Petrarca
       parts = ranges.map do |range|
         s, e = range
         prefix = body[0, s.size]
-        if Range.new(s.to_i, e.to_i).cover?(prefix.to_i)
+        if Range.new(s, e).cover?(prefix)
           [prefix, body[(prefix.size)..]]
         else
           nil
